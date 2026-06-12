@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>English Club – Govt. M.M. College, Jashore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0D1B2A;
+      --gold:    #C9A84C;
+      --gold-lt: #E8CC80;
+      --cream:   #F7F3EB;
+      --white:   #FFFFFF;
+      --ink:     #1C1C1C;
+      --muted:   #6B6B6B;
+      --rule:    rgba(201,168,76,0.35);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ───────────────────────────────────────────── */
+    .hero {
+      background: var(--navy);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Diagonal gold accent band */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; left: -80px;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(201,168,76,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; right: -60px;
+      width: 380px; height: 380px;
+      background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ornamental lines either side of logo */
+    .hero-ornament {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 1.8rem;
+    }
+    .hero-ornament span {
+      display: block;
+      width: 60px; height: 1px;
+      background: var(--gold);
+      opacity: 0.7;
+    }
+    .hero-ornament svg { flex-shrink: 0; }
+
+    .hero-badge {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.78rem;
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.4rem, 9vw, 7.5rem);
+      font-weight: 900;
+      line-height: 0.92;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 em {
+      display: block;
+      color: var(--gold);
+      font-style: normal;
+      font-size: 0.62em;
+      letter-spacing: 0.12em;
+      font-weight: 400;
+    }
+
+    .hero-sub {
+      margin-top: 1.8rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0.06em;
+    }
+
+    .hero-est {
+      margin-top: 2.4rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.9rem;
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      padding: 0.55rem 1.4rem;
+    }
+    .hero-est span {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-lt);
+    }
+    .hero-est strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+    }
+
+    /* ── NAV ───────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--navy);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      overflow-x: auto;
+    }
+    nav a {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      padding: 1rem 1.4rem;
+      transition: color 0.2s, border-bottom 0.2s;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+    }
+    nav a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+
+    /* ── SECTION BASE ──────────────────────────────────── */
+    section {
+      padding: 5rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-rule {
+      width: 48px; height: 2px;
+      background: var(--gold);
+      margin: 1.2rem 0 2.8rem;
+    }
+
+    /* ── BOARD OF ADVISORS ─────────────────────────────── */
+    #advisors { background: var(--navy); max-width: 100%; padding: 5rem 2rem; }
+    #advisors .inner { max-width: 1100px; margin: 0 auto; }
+    #advisors .section-title { color: var(--white); }
+    #advisors .section-eyebrow { color: var(--gold-lt); }
+
+    .advisor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.8rem;
+    }
+    .advisor-card {
+      border: 1px solid var(--rule);
+      padding: 1.8rem;
+      border-radius: 3px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .advisor-card:hover {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.06);
+    }
+    .advisor-role {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.55rem;
+    }
+    .advisor-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--white);
+      line-height: 1.3;
+    }
+
+    /* ── CO-ORDINATION ─────────────────────────────────── */
+    .coord-chief {
+      background: var(--navy);
+      color: var(--white);
+      border-left: 4px solid var(--gold);
+      padding: 1.8rem 2rem;
+      border-radius: 3px;
+      margin-bottom: 2rem;
+    }
+    .coord-chief .role-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+    .coord-chief h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--white);
+    }
+    .coord-chief p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.55);
+      margin-top: 0.25rem;
+    }
+
+    .coord-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .coord-item {
+      border: 1px solid rgba(13,27,42,0.15);
+      padding: 1.2rem 1.4rem;
+      border-radius: 3px;
+      background: var(--white);
+    }
+    .coord-item .num {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 0.35rem;
+    }
+    .coord-item h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--navy);
+    }
+    .coord-item p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+
+    /* ── EXECUTIVE COMMITTEE ───────────────────────────── */
+    #executive { background: #F0EDE4; max-width: 100%; padding: 5rem 2rem; }
+    #executive .inner { max-width: 1100px; margin: 0 auto; }
+
+    .exec-officers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 3rem;
+    }
+    .exec-card {
+      background: var(--navy);
+      padding: 1.5rem;
+      border-radius: 3px;
+      position: relative;
+      overflow: hidden;
+    }
+    .exec-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--gold);
+    }
+    .exec-card .role {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .exec-card .name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--white);
+      line-height: 1.3;
+    }
+
+    /* Executive Members table */
+    .members-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--navy);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+
+    .year-group { margin-bottom: 2rem; }
+    .year-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: var(--navy);
+      display: inline-block;
+      padding: 0.3rem 0.9rem;
+      border-radius: 2px;
+      margin-bottom: 0.9rem;
+    }
+    .member-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .chip {
+      background: var(--white);
+      border: 1px solid rgba(13,27,42,0.12);
+      padding: 0.5rem 1rem;
+      border-radius: 2px;
+      font-size: 0.85rem;
+      color: var(--navy);
+      font-weight: 500;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .chip:hover {
+      background: var(--navy);
+      color: var(--gold);
+      border-color: var(--navy);
+    }
+
+    /* ── ACTIVITIES ────────────────────────────────────── */
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.4rem;
+    }
+    .activity-card {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 3px;
+      border-top: 3px solid var(--gold);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .activity-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(13,27,42,0.1);
+    }
+    .activity-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .activity-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+    .activity-card p {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER ────────────────────────────────────────── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      padding: 3rem 2rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+    }
+    footer strong { color: var(--gold); font-weight: 600; }
+
+    /* ── DIVIDERS ──────────────────────────────────────── */
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(13,27,42,0.1);
+      margin: 0;
+    }
+
+    @media (max-width: 600px) {
+      nav a { padding: 0.85rem 0.85rem; font-size: 0.65rem; }
+      section { padding: 3.5rem 1.2rem; }
+    }
+
+    /* Fade-in animation */
+    .fade { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- ══ HERO ══════════════════════════════════════════════ -->
+<header class="hero">
+  <div class="hero-badge">Government Michael Madhusudan College, Jashore</div>
+
+  <div class="hero-ornament">
+    <span></span>
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+      <circle cx="11" cy="11" r="4" fill="#C9A84C"/>
+      <circle cx="11" cy="11" r="9.5" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.4"/>
+    </svg>
+    <span></span>
+  </div>
+
+  <h1>
+    English
+    <em>Club</em>
+  </h1>
+
+  <p class="hero-sub">Department of English &nbsp;·&nbsp; Govt. M.M. College</p>
+
+  <div class="hero-est">
+    <span>Established</span>
+    <strong>2026</strong>
+  </div>
+</header>
+
+<!-- ══ STICKY NAV ════════════════════════════════════════ -->
+<nav>
+  <a href="#advisors">Advisors</a>
+  <a href="#coordination">Co-ordination</a>
+  <a href="#executive">Committee</a>
+  <a href="#activities">Activities</a>
+</nav>
+
+<!-- ══ BOARD OF ADVISORS ═════════════════════════════════ -->
+<div id="advisors">
+  <div class="inner">
+    <p class="section-eyebrow">Leadership</p>
+    <h2 class="section-title">Board of Advisors</h2>
+    <div class="section-rule"></div>
+
+    <div class="advisor-grid fade">
+      <div class="advisor-card">
+        <div class="advisor-role">Chief Advisor</div>
+        <div class="advisor-name">Principal<br><small style="font-size:0.78rem;color:rgba(255,255,255,0.45);font-family:Inter,sans-serif;font-weight:300">Govt. Michael Madhusudan College</small></div>
+      </div>
+      <div class="advisor-card">
+        <div class="advisor-role">Deputy Chief Advisor</div>
+        <div class="advisor-name">Vice Principal<br><small style="font-size:0.78rem;color:rgba(255,255,255,0.45);font-family:Inter,sans-serif;font-weight:300">Govt. Michael Madhusudan College</small></div>
+      </div>
+      <div class="advisor-card" style="grid-column: span 1;">
+        <div class="advisor-role">Advisors</div>
+        <div class="advisor-name" style="font-size:0.95rem;">All Faculty Members<br><small style="font-size:0.78rem;color:rgba(255,255,255,0.45);font-family:Inter,sans-serif;font-weight:300">Department of English</small></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CO-ORDINATION COMMITTEE ══════════════════════════ -->
+<section id="coordination">
+  <p class="section-eyebrow">Administration</p>
+  <h2 class="section-title">Co-Ordination Committee</h2>
+  <div class="section-rule"></div>
+
+  <div class="coord-chief fade">
+    <div class="role-tag">Chief Co-Ordinator</div>
+    <h3>RMA Zakaria</h3>
+    <p>Head, Department of English</p>
+  </div>
+
+  <div class="coord-list fade">
+    <div class="coord-item">
+      <div class="num">CO-ORD · 01</div>
+      <h4>Md. Ikhtiar Uddin</h4>
+      <p>Professor</p>
+    </div>
+    <div class="coord-item">
+      <div class="num">CO-ORD · 02</div>
+      <h4>Abdus Salam</h4>
+      <p>Assistant Professor</p>
+    </div>
+    <div class="coord-item">
+      <div class="num">CO-ORD · 03</div>
+      <h4>Dipthi Mittra</h4>
+      <p>Assistant Professor</p>
+    </div>
+    <div class="coord-item">
+      <div class="num">CO-ORD · 04</div>
+      <h4>Sankar Datta</h4>
+      <p>Assistant Professor</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ══ STUDENTS' EXECUTIVE COMMITTEE ════════════════════ -->
+<div id="executive">
+  <div class="inner">
+    <p class="section-eyebrow">Student Leadership</p>
+    <h2 class="section-title">Students' Executive Committee</h2>
+    <div class="section-rule"></div>
+
+    <div class="exec-officers fade">
+      <div class="exec-card">
+        <div class="role">President</div>
+        <div class="name">Md. Ibrahim Hossain</div>
+      </div>
+      <div class="exec-card">
+        <div class="role">General Secretary</div>
+        <div class="name">Md. Raihan Hossain</div>
+      </div>
+      <div class="exec-card">
+        <div class="role">Joint Secretary</div>
+        <div class="name">Md. Reduan Islam</div>
+      </div>
+      <div class="exec-card">
+        <div class="role">Treasurer</div>
+        <div class="name">Abid Nazir Shohan</div>
+      </div>
+      <div class="exec-card">
+        <div class="role">Organizing Secretary</div>
+        <div class="name">Md. Choion Uddin Choncol</div>
+      </div>
+      <div class="exec-card">
+        <div class="role">Media Secretary</div>
+        <div class="name">Atqiya Anjum Medha</div>
+      </div>
+      <div class="exec-card">
+        <div class="role">Cultural Secretary</div>
+        <div class="name">Fahmida Yeasmin</div>
+      </div>
+      <div class="exec-card">
+        <div class="role">Development Secretary</div>
+        <div class="name">Zarin Tasnim Risha</div>
+      </div>
+      <div class="exec-card">
+        <div class="role">Students' Executive Co-ordinator</div>
+        <div class="name">Istiak Ahammad Likhon</div>
+      </div>
+    </div>
+
+    <!-- Executive Members by year -->
+    <div class="fade">
+      <div class="members-title">Executive Members</div>
+
+      <div class="year-group">
+        <div class="year-label">4th Year</div>
+        <div class="member-chips">
+          <span class="chip">Aporupa Mondol</span>
+          <span class="chip">Anup Kumar</span>
+          <span class="chip">Eva Biswas</span>
+          <span class="chip">Sabira Sheikh Faiza</span>
+          <span class="chip">Farhana Mim</span>
+          <span class="chip">Asif Mahmud Akash</span>
+          <span class="chip">Tanveer Hossain</span>
+          <span class="chip">Shawon Hossain</span>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year-label">3rd Year</div>
+        <div class="member-chips">
+          <span class="chip">Md. Rakib Hassan</span>
+          <span class="chip">Umor Faruk</span>
+          <span class="chip">Avizit Kumer</span>
+          <span class="chip">Sadia Sultana Shakal</span>
+          <span class="chip">Bidipta Saha</span>
+          <span class="chip">Puja Mondal</span>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year-label">2nd Year</div>
+        <div class="member-chips">
+          <span class="chip">Md. Shimul Hossen</span>
+          <span class="chip">Ahsanul Hasan Rafi</span>
+          <span class="chip">S.A. Sajib</span>
+          <span class="chip">Nusrat Afrin</span>
+          <span class="chip">Kaniz Fatema</span>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <div class="year-label">1st Year</div>
+        <div class="member-chips">
+          <span class="chip">Md. Sajib Mia</span>
+          <span class="chip">Md. Mohammad Rasel</span>
+          <span class="chip">Prity Saha Disha</span>
+          <span class="chip">Anika Biswas Anu</span>
+          <span class="chip">Hasib Mahmud Shawon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ACTIVITIES ════════════════════════════════════════ -->
+<section id="activities">
+  <p class="section-eyebrow">What We Do</p>
+  <h2 class="section-title">Club Activities</h2>
+  <div class="section-rule"></div>
+
+  <div class="activities-grid fade">
+    <div class="activity-card">
+      <div class="activity-icon">🗣️</div>
+      <h3>Spoken English Practice</h3>
+      <p>Regular sessions to build fluency, confidence, and everyday communication skills in English.</p>
+    </div>
+    <div class="activity-card">
+      <div class="activity-icon">🏆</div>
+      <h3>Competitions</h3>
+      <p>Debate, quiz contests, and essay writing events to sharpen critical thinking and expression.</p>
+    </div>
+    <div class="activity-card">
+      <div class="activity-icon">📖</div>
+      <h3>Book Review</h3>
+      <p>Guided reading and analysis sessions that deepen literary understanding and interpretive skills.</p>
+    </div>
+    <div class="activity-card">
+      <div class="activity-icon">📰</div>
+      <h3>Magazine Publication</h3>
+      <p>A student-led magazine showcasing creative writing, essays, poetry, and club news.</p>
+    </div>
+    <div class="activity-card">
+      <div class="activity-icon">💼</div>
+      <h3>Career Development</h3>
+      <p>Open discussions on career pathways, opportunities, and professional growth for students.</p>
+    </div>
+    <div class="activity-card">
+      <div class="activity-icon">💬</div>
+      <h3>Topic-Wise Discussion</h3>
+      <p>Structured conversations on literature, language, culture, and contemporary issues.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════════════ -->
+<footer>
+  <p><strong>English Club</strong> &nbsp;·&nbsp; Est. 2026</p>
+  <p style="margin-top:0.5rem;">Government Michael Madhusudan College, Jashore, Bangladesh</p>
+  <p style="margin-top:0.5rem;">Department of English</p>
+</footer>
+
+<script>
+  // Scroll-triggered fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
