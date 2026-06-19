@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Committee – English Club MMC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --navy: #0D1B2A; --gold: #C9A84C; --gold-lt: #E8CC80; --cream: #F7F3EB; --white: #FFFFFF; --ink: #1C1C1C; --muted: #6B6B6B; --rule: rgba(201,168,76,0.35); }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink); overflow-x: hidden; }
+    nav { background: var(--navy); border-bottom: 1px solid var(--rule); display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; position: sticky; top: 0; z-index: 100; height: 60px; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--gold); text-decoration: none; letter-spacing: 0.05em; font-weight: 700; }
+    .nav-links { display: flex; gap: 0; }
+    .nav-links a { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.6); text-decoration: none; padding: 1.3rem 1.1rem; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .menu-toggle { display: none; flex-direction: column; justify-content: space-between; width: 24px; height: 18px; background: transparent; border: none; cursor: pointer; z-index: 101; }
+    .menu-toggle span { display: block; width: 100%; height: 2px; background-color: var(--gold); transition: transform 0.3s, opacity 0.3s; }
+    @media (max-width: 1024px) {
+      .menu-toggle { display: flex; }
+      .nav-links { position: fixed; top: 60px; right: -100%; width: 260px; height: calc(100vh - 60px); background: var(--navy); border-left: 1px solid var(--rule); flex-direction: column; gap: 0; transition: right 0.3s ease; padding-top: 1.5rem; }
+      .nav-links.active { right: 0; }
+      .nav-links a { padding: 1.2rem 2rem; font-size: 0.8rem; border-bottom: none; border-left: 3px solid transparent; display: block; width: 100%; }
+      .nav-links a:hover, .nav-links a.active { border-bottom-color: transparent; border-left-color: var(--gold); background: rgba(201,168,76,0.05); }
+      .menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+      .menu-toggle.active span:nth-child(2) { opacity: 0; }
+      .menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    }
+    .page-hero { background: var(--navy); padding: 5rem 2rem 4rem; text-align: center; }
+    .page-hero .eyebrow { font-family: 'Cormorant Garamond', serif; font-size: 0.78rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; color: var(--white); }
+    .page-hero .rule { width: 48px; height: 2px; background: var(--gold); margin: 1.2rem auto 0; }
+    .section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .section-eyebrow { font-family: 'Cormorant Garamond', serif; font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; color: var(--navy); }
+    .section-rule { width: 48px; height: 2px; background: var(--gold); margin: 1.2rem 0 2.8rem; }
+    .advisors-band { background: var(--navy); padding: 5rem 2rem; }
+    .advisors-band .inner { max-width: 1200px; margin: 0 auto; }
+    .advisors-band .section-title { color: var(--white); }
+    .advisors-band .section-eyebrow { color: var(--gold-lt); }
+    .advisor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2.8rem; }
+    .advisor-card { border: 1px solid var(--rule); padding: 2rem; border-radius: 2px; transition: border-color 0.2s, background 0.2s; }
+    .advisor-card:hover { border-color: var(--gold); background: rgba(201,168,76,0.06); }
+    .advisor-role { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.55rem; }
+    .advisor-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--white); }
+    .advisor-name small { display: block; font-family: 'Inter', sans-serif; font-size: 0.78rem; color: rgba(255,255,255,0.45); font-weight: 300; margin-top: 0.3rem; }
+    .coord-chief { background: var(--navy); color: var(--white); border-left: 4px solid var(--gold); padding: 1.8rem 2rem; border-radius: 2px; margin-bottom: 2rem; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+    .coord-chief-photo { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--gold); overflow: hidden; flex-shrink: 0; background: rgba(201,168,76,0.15); display: flex; align-items: center; justify-content: center; }
+    .coord-chief-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .coord-chief-photo .initial { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--gold); font-weight: 700; }
+    .coord-chief .role-tag { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+    .coord-chief h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; color: var(--white); }
+    .coord-chief p { font-size: 0.88rem; color: rgba(255,255,255,0.55); margin-top: 0.25rem; }
+    .coord-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .coord-item { border: 1px solid rgba(13,27,42,0.15); padding: 1.4rem; border-radius: 2px; background: var(--white); display: flex; align-items: center; gap: 1rem; }
+    .coord-photo { width: 56px; height: 56px; border-radius: 50%; border: 2px solid var(--gold); overflow: hidden; flex-shrink: 0; background: var(--navy); display: flex; align-items: center; justify-content: center; }
+    .coord-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .coord-photo .initial { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gold); font-weight: 700; }
+    .coord-item .num { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 0.25rem; }
+    .coord-item h4 { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--navy); }
+    .coord-item p { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+    .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.5rem; margin-bottom: 3.5rem; }
+    .photo-card { background: var(--white); border-radius: 4px; overflow: hidden; text-align: center; padding-bottom: 1.4rem; box-shadow: 0 2px 12px rgba(13,27,42,0.07); transition: transform 0.2s, box-shadow 0.2s; }
+    .photo-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(13,27,42,0.13); }
+    .photo-card-img { position: relative; background: var(--navy); padding-top: 1.6rem; display: flex; justify-content: center; }
+    .avatar-circle { width: 110px; height: 110px; border-radius: 50%; border: 4px solid var(--gold); overflow: hidden; background: rgba(201,168,76,0.12); display: flex; align-items: center; justify-content: center; margin: 0 auto; position: relative; z-index: 1; }
+    .avatar-circle img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .avatar-circle .initial { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--gold); font-weight: 700; line-height: 1; }
+    .photo-card-wave { background: var(--navy); height: 32px; margin-bottom: -1px; clip-path: ellipse(55% 100% at 50% 0%); margin-top: -16px; }
+    .photo-card-body { padding: 1rem 0.8rem 0; }
+    .photo-card-role { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.35rem; font-weight: 600; }
+    .photo-card-name { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--navy); line-height: 1.3; }
+    .exec-band { background: #F0EDE4; padding: 5rem 2rem; }
+    .exec-band .inner { max-width: 1200px; margin: 0 auto; }
+    .members-section { margin-top: 1rem; }
+    .members-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--navy); margin-bottom: 1.2rem; padding-bottom: 0.6rem; border-bottom: 2px solid var(--gold); display: inline-block; }
+    .year-group { margin-bottom: 2.5rem; }
+    .year-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); background: var(--navy); display: inline-block; padding: 0.3rem 0.9rem; border-radius: 2px; margin-bottom: 1rem; }
+    .member-photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 1rem; }
+    .member-mini-card { background: var(--white); border-radius: 3px; text-align: center; padding: 1rem 0.6rem 0.9rem; box-shadow: 0 1px 6px rgba(13,27,42,0.07); transition: transform 0.2s, box-shadow 0.2s; }
+    .member-mini-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(13,27,42,0.12); }
+    .mini-avatar { width: 72px; height: 72px; border-radius: 50%; border: 3px solid var(--gold); overflow: hidden; background: var(--navy); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.7rem; }
+    .mini-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .mini-avatar .initial { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--gold); font-weight: 700; }
+    .member-mini-card .m-name { font-size: 0.78rem; font-weight: 600; color: var(--navy); line-height: 1.3; }
+    footer { background: var(--navy); color: rgba(255,255,255,0.45); text-align: center; padding: 3rem 2rem; font-size: 0.82rem; letter-spacing: 0.05em; border-top: 1px solid var(--rule); }
+    footer strong { color: var(--gold); }
+    .fade { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">EC · MMC</a>
+  <button class="menu-toggle" id="mobile-menu-btn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="nav-links" id="nav-menu">
+    <a href="index.html">Home</a>
+    <a href="committee.html" class="active">Committee</a>
+    <a href="activities.html">Activities</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <p class="eyebrow">People</p>
+  <h1>Our Committee</h1>
+  <div class="rule"></div>
+</div>
+
+<!-- BOARD OF ADVISORS -->
+<div class="advisors-band">
+  <div class="inner">
+    <p class="section-eyebrow">Leadership</p>
+    <h2 class="section-title">Board of Advisors</h2>
+    <div class="advisor-grid fade">
+      <div class="advisor-card">
+        <div class="advisor-role">Chief Advisor</div>
+        <div class="advisor-name">Principal<small>Govt. Michael Madhusudan College</small></div>
+      </div>
+      <div class="advisor-card">
+        <div class="advisor-role">Deputy Chief Advisor</div>
+        <div class="advisor-name">Vice Principal<small>Govt. Michael Madhusudan College</small></div>
+      </div>
+      <div class="advisor-card">
+        <div class="advisor-role">Advisors</div>
+        <div class="advisor-name">All Faculty Members<small>Department of English</small></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CO-ORDINATION COMMITTEE -->
+<div class="section">
+  <p class="section-eyebrow">Administration</p>
+  <h2 class="section-title">Co-Ordination Committee</h2>
+  <div class="section-rule"></div>
+
+  <!-- Chief Co-ordinator: add photo by setting src="images/zakaria.jpg" on the img tag -->
+  <div class="coord-chief fade">
+    <div class="coord-chief-photo" id="chief-photo-wrap">
+      <span class="initial" id="chief-initial">R</span>
+    </div>
+    <div>
+      <div class="role-tag">Chief Co-Ordinator</div>
+      <h3>RMA Zakaria</h3>
+      <p>Head, Department of English</p>
+    </div>
+  </div>
+  <!-- To add chief photo: change data-photo="" to data-photo="images/zakaria.jpg" -->
+  <div style="display:none" id="chief-photo-data" data-photo="images/zakaria.jpg"></div>
+
+  <!-- Coordinators: data-photo is now on .coord-photo directly -->
+  <div class="coord-list fade">
+    <div class="coord-item">
+      <div class="coord-photo" data-photo="images/ikhtiar.jpg" data-initial="I"><span class="initial">I</span></div>
+      <div><div class="num">CO-ORD · 01</div><h4>Md. Ikhtiar Uddin</h4><p>Professor</p></div>
+    </div>
+    <div class="coord-item">
+      <div class="coord-photo" data-photo="images/salam.jpg" data-initial="A"><span class="initial">A</span></div>
+      <div><div class="num">CO-ORD · 02</div><h4>Abdus Salam</h4><p>Assistant Professor</p></div>
+    </div>
+    <div class="coord-item">
+      <div class="coord-photo" data-photo="images/dipti.jpg" data-initial="D"><span class="initial">D</span></div>
+      <div><div class="num">CO-ORD · 03</div><h4>Dipthi Mittra</h4><p>Assistant Professor</p></div>
+    </div>
+    <div class="coord-item">
+      <div class="coord-photo" data-photo="images/sankar.jpg" data-initial="S"><span class="initial">S</span></div>
+      <div><div class="num">CO-ORD · 04</div><h4>Sankar Datta</h4><p>Assistant Professor</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- EXECUTIVE COMMITTEE -->
+<div class="exec-band">
+  <div class="inner">
+    <p class="section-eyebrow">Student Leadership</p>
+    <h2 class="section-title" style="color:var(--navy);">Students' Executive Committee</h2>
+    <div class="section-rule"></div>
+
+    <div class="photo-grid fade">
+      <div class="photo-card">
+        <div class="photo-card-img">
+          <div class="avatar-circle" data-photo="images/ibrahim.jpg" data-initial="I"><span class="initial">I</span></div>
+        </div>
+        <div class="photo-card-wave"></div>
+        <div class="photo-card-body">
+          <div class="photo-card-role">President</div>
+          <div class="photo-card-name">Md. Ibrahim Hossain</div>
+        </div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-card-img">
+          <div class="avatar-circle" data-photo="images/raihan.jpg" data-initial="R"><span class="initial">R</span></div>
+        </div>
+        <div class="photo-card-wave"></div>
+        <div class="photo-card-body">
+          <div class="photo-card-role">General Secretary</div>
+          <div class="photo-card-name">Md. Raihan Hossain</div>
+        </div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-card-img">
+          <div class="avatar-circle" data-photo="images/reduan.jpg" data-initial="R"><span class="initial">R</span></div>
+        </div>
+        <div class="photo-card-wave"></div>
+        <div class="photo-card-body">
+          <div class="photo-card-role">Joint Secretary</div>
+          <div class="photo-card-name">Md. Reduan Islam</div>
+        </div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-card-img">
+          <div class="avatar-circle" data-photo="images/sohan.jpg" data-initial="A"><span class="initial">A</span></div>
+        </div>
+        <div class="photo-card-wave"></div>
+        <div class="photo-card-body">
+          <div class="photo-card-role">Treasurer</div>
+          <div class="photo-card-name">Abid Nazir Shohan</div>
+        </div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-card-img">
+          <div class="avatar-circle" data-photo="images/choncol.jpg" data-initial="C"><span class="initial">C</span></div>
+        </div>
+        <div class="photo-card-wave"></div>
+        <div class="photo-card-body">
+          <div class="photo-card-role">Organizing Secretary</div>
+          <div class="photo-card-name">Md. Choion Uddin Choncol</div>
+        </div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-card-img">
+          <div class="avatar-circle" data-photo="images/medha.jpg" data-initial="A"><span class="initial">A</span></div>
+        </div>
+        <div class="photo-card-wave"></div>
+        <div class="photo-card-body">
+          <div class="photo-card-role">Media Secretary</div>
+          <div class="photo-card-name">Atqiya Anjum Medha</div>
+        </div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-card-img">
+          <div class="avatar-circle" data-photo="images/roshni.jpg" data-initial="F"><span class="initial">F</span></div>
+        </div>
+        <div class="photo-card-wave"></div>
+        <div class="photo-card-body">
+          <div class="photo-card-role">Cultural Secretary</div>
+          <div class="photo-card-name">Fahmida Yeasmin</div>
+        </div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-card-img">
+          <div class="avatar-circle" data-photo="images/risha.jpg" data-initial="Z"><span class="initial">Z</span></div>
+        </div>
+        <div class="photo-card-wave"></div>
+        <div class="photo-card-body">
+          <div class="photo-card-role">Development Secretary</div>
+          <div class="photo-card-name">Zarin Tasnim Risha</div>
+        </div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-card-img">
+          <div class="avatar-circle" data-photo="images/likhon.jpg" data-initial="I"><span class="initial">I</span></div>
+        </div>
+        <div class="photo-card-wave"></div>
+        <div class="photo-card-body">
+          <div class="photo-card-role">Students' Executive Co-ordinator</div>
+          <div class="photo-card-name">Istiak Ahammad Likhon</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXECUTIVE MEMBERS -->
+    <div class="members-section fade">
+      <div class="members-title">Executive Members</div>
+      <div class="year-group">
+        <div class="year-label">4th Year</div>
+        <div class="member-photo-grid">
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="" data-initial="A"><span class="initial">A</span></div><div class="m-name">Aporupa Mondol</div></div>
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="" data-initial="A"><span class="initial">A</span></div><div class="m-name">Anup Kumar</div></div>
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="" data-initial="E"><span class="initial">E</span></div><div class="m-name">Eva Biswas</div></div>
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="" data-initial="S"><span class="initial">S</span></div><div class="m-name">Sabira Sheikh Faiza</div></div>
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="" data-initial="F"><span class="initial">F</span></div><div class="m-name">Farhana Mim</div></div>
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="" data-initial="A"><span class="initial">A</span></div><div class="m-name">Asif Mahmud Akash</div></div>
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="" data-initial="T"><span class="initial">T</span></div><div class="m-name">Tanveer Hossain</div></div>
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="" data-initial="S"><span class="initial">S</span></div><div class="m-name">Shawon Hossain</div></div>
+        </div>
+      </div>
+      <div class="year-group">
+        <div class="year-label">3rd Year</div>
+        <div class="member-photo-grid">
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="" data-initial="R"><span class="initial">R</span></div><div class="m-name">Md. Rakib Hassan</div></div>
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="images/omor.jpg" data-initial="U"><span class="initial">U</span></div><div class="m-name">Umor Faruk</div></div>
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="images/avijit.jpg" data-initial="A"><span class="initial">A</span></div><div class="m-name">Avizit Kumer</div></div>
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="" data-initial="S"><span class="initial">S</span></div><div class="m-name">Sadia Sultana Shakal</div></div>
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="" data-initial="B"><span class="initial">B</span></div><div class="m-name">Bidipta Saha</div></div>
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="images/puja.jpg" data-initial="P"><span class="initial">P</span></div><div class="m-name">Puja Mondal</div></div>
+        </div>
+      </div>
+      <div class="year-group">
+        <div class="year-label">2nd Year</div>
+        <div class="member-photo-grid">
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="" data-initial="S"><span class="initial">S</span></div><div class="m-name">Md. Shimul Hossen</div></div>
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="images/rafi.jpg" data-initial="A"><span class="initial">A</span></div><div class="m-name">Ahsanul Hasan Rafi</div></div>
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="images/sajib.jpg" data-initial="S"><span class="initial">S</span></div><div class="m-name">S.A. Sajib</div></div>
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="images/nusrat.jpg" data-initial="N"><span class="initial">N</span></div><div class="m-name">Nusrat Afrin</div></div>
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="" data-initial="K"><span class="initial">K</span></div><div class="m-name">Kaniz Fatema</div></div>
+        </div>
+      </div>
+      <div class="year-group">
+        <div class="year-label">1st Year</div>
+        <div class="member-photo-grid">
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="" data-initial="S"><span class="initial">S</span></div><div class="m-name">Md. Sajib Mia</div></div>
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="" data-initial="R"><span class="initial">R</span></div><div class="m-name">Md. Mohammad Rasel</div></div>
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="images/disha.jpg" data-initial="P"><span class="initial">P</span></div><div class="m-name">Prity Saha Disha</div></div>
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="" data-initial="A"><span class="initial">A</span></div><div class="m-name">Anika Biswas Anu</div></div>
+          <div class="member-mini-card"><div class="mini-avatar" data-photo="" data-initial="H"><span class="initial">H</span></div><div class="m-name">Hasib Mahmud Shawon</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p><strong>English Club</strong> &nbsp;·&nbsp; Est. 2026</p>
+  <p style="margin-top:0.5rem;">Government Michael Madhusudan College, Jashore, Bangladesh</p>
+</footer>
+
+<script>
+  // Mobile Menu Toggle
+  const toggleBtn = document.getElementById('mobile-menu-btn');
+  const navMenu = document.getElementById('nav-menu');
+  toggleBtn.addEventListener('click', () => {
+    toggleBtn.classList.toggle('active');
+    navMenu.classList.toggle('active');
+  });
+  document.addEventListener('click', (e) => {
+    if (!toggleBtn.contains(e.target) && !navMenu.contains(e.target)) {
+      toggleBtn.classList.remove('active');
+      navMenu.classList.remove('active');
+    }
+  });
+
+  function loadPhotos() {
+    // 1. Chief co-ordinator photo
+    const chiefSrc = document.getElementById('chief-photo-data')?.getAttribute('data-photo') || '';
+    if (chiefSrc) {
+      const wrap = document.getElementById('chief-photo-wrap');
+      const img = new Image();
+      img.src = chiefSrc;
+      img.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+      img.onerror = () => {}; // keep initial on error
+      img.onload = () => { wrap.innerHTML = ''; wrap.appendChild(img); };
+    }
+
+    // 2. Coord photos — data-photo is on .coord-photo itself
+    document.querySelectorAll('.coord-photo[data-photo]').forEach(el => {
+      const src = el.getAttribute('data-photo');
+      const initial = el.getAttribute('data-initial') || '?';
+      if (!src) return;
+      const img = new Image();
+      img.src = src;
+      img.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+      img.onload = () => { el.innerHTML = ''; el.appendChild(img); };
+      img.onerror = () => { el.innerHTML = `<span class="initial">${initial}</span>`; };
+    });
+
+    // 3. Officer avatar circles
+    document.querySelectorAll('.avatar-circle[data-photo]').forEach(el => {
+      const src = el.getAttribute('data-photo');
+      const initial = el.getAttribute('data-initial') || '?';
+      if (!src) return;
+      const img = new Image();
+      img.src = src;
+      img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+      img.onload = () => { el.innerHTML = ''; el.appendChild(img); };
+      img.onerror = () => { el.innerHTML = `<span class="initial">${initial}</span>`; };
+    });
+
+    // 4. Mini avatars (executive members)
+    document.querySelectorAll('.mini-avatar[data-photo]').forEach(el => {
+      const src = el.getAttribute('data-photo');
+      const initial = el.getAttribute('data-initial') || '?';
+      if (!src) return;
+      const img = new Image();
+      img.src = src;
+      img.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+      img.onload = () => { el.innerHTML = ''; el.appendChild(img); };
+      img.onerror = () => { el.innerHTML = `<span class="initial">${initial}</span>`; };
+    });
+  }
+
+  loadPhotos();
+
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.08 }
+  );
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

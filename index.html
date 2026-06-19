@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>English Club – Govt. M.M. College, Jashore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0D1B2A; --gold: #C9A84C; --gold-lt: #E8CC80;
+      --cream: #F7F3EB; --white: #FFFFFF; --ink: #1C1C1C;
+      --muted: #6B6B6B; --rule: rgba(201,168,76,0.35);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink); overflow-x: hidden; }
+
+    /* NAV */
+    nav { background: var(--navy); border-bottom: 1px solid var(--rule); display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; position: sticky; top: 0; z-index: 100; height: 60px; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--gold); text-decoration: none; letter-spacing: 0.05em; font-weight: 700; }
+    .nav-links { display: flex; gap: 0; }
+    .nav-links a { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.6); text-decoration: none; padding: 1.3rem 1.1rem; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .menu-toggle { display: none; flex-direction: column; justify-content: space-between; width: 24px; height: 18px; background: transparent; border: none; cursor: pointer; z-index: 101; }
+    .menu-toggle span { display: block; width: 100%; height: 2px; background-color: var(--gold); transition: transform 0.3s, opacity 0.3s; }
+    @media (max-width: 1024px) {
+      .menu-toggle { display: flex; }
+      .nav-links { position: fixed; top: 60px; right: -100%; width: 260px; height: calc(100vh - 60px); background: var(--navy); border-left: 1px solid var(--rule); flex-direction: column; gap: 0; transition: right 0.3s ease; padding-top: 1.5rem; }
+      .nav-links.active { right: 0; }
+      .nav-links a { padding: 1.2rem 2rem; font-size: 0.8rem; border-bottom: none; border-left: 3px solid transparent; display: block; width: 100%; }
+      .nav-links a:hover, .nav-links a.active { border-bottom-color: transparent; border-left-color: var(--gold); background: rgba(201,168,76,0.05); }
+      .menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+      .menu-toggle.active span:nth-child(2) { opacity: 0; }
+      .menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    }
+
+    /* HERO */
+    .hero { background: var(--navy); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 4rem 2rem 5rem; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -120px; left: -80px; width: 420px; height: 420px; background: radial-gradient(circle, rgba(201,168,76,0.18) 0%, transparent 70%); pointer-events: none; }
+    .hero::after { content: ''; position: absolute; bottom: -100px; right: -60px; width: 380px; height: 380px; background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%); pointer-events: none; }
+    .hero-ornament { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 1.8rem; }
+    .hero-ornament span { display: block; width: 60px; height: 1px; background: var(--gold); opacity: 0.7; }
+    .hero-badge { font-family: 'Cormorant Garamond', serif; font-size: 0.78rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3.4rem, 9vw, 7.5rem); font-weight: 900; line-height: 0.92; color: var(--white); text-transform: uppercase; letter-spacing: -0.02em; }
+    .hero h1 em { display: block; color: var(--gold); font-style: normal; font-size: 0.62em; letter-spacing: 0.12em; font-weight: 400; }
+    .hero-sub { margin-top: 1.8rem; font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: rgba(255,255,255,0.65); letter-spacing: 0.06em; }
+    .hero-est { margin-top: 2.4rem; display: inline-flex; align-items: center; gap: 0.9rem; border: 1px solid var(--rule); padding: 0.55rem 1.4rem; }
+    .hero-est span { font-family: 'Cormorant Garamond', serif; font-size: 0.82rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-lt); }
+    .hero-est strong { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--gold); }
+    .hero-btns { margin-top: 2.8rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .btn-primary { background: var(--gold); color: var(--navy); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.9rem 2rem; text-decoration: none; border-radius: 2px; transition: background 0.2s; }
+    .btn-primary:hover { background: var(--gold-lt); }
+    .btn-outline { border: 1px solid var(--rule); color: rgba(255,255,255,0.7); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.9rem 2rem; text-decoration: none; border-radius: 2px; transition: border-color 0.2s, color 0.2s; }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* SECTIONS */
+    .section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .section-eyebrow { font-family: 'Cormorant Garamond', serif; font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: var(--navy); line-height: 1.15; }
+    .section-rule { width: 48px; height: 2px; background: var(--gold); margin: 1.2rem 0 2.8rem; }
+
+    /* HIGHLIGHTS */
+    .highlights { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.4rem; }
+    .highlight-card { background: var(--white); border-top: 3px solid var(--gold); padding: 2rem; border-radius: 2px; text-align: center; transition: transform 0.2s, box-shadow 0.2s; }
+    .highlight-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(13,27,42,0.1); }
+    .highlight-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+    .highlight-card h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--navy); margin-bottom: 0.5rem; }
+    .highlight-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+    .highlight-link { display: inline-block; margin-top: 1rem; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); text-decoration: none; font-weight: 600; }
+
+    /* WELCOME */
+    .welcome-band { background: var(--navy); padding: 5rem 2rem; }
+    .welcome-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+    .welcome-inner .section-eyebrow { color: var(--gold-lt); }
+    .welcome-inner .section-title { color: var(--white); margin-bottom: 1.5rem; }
+    .welcome-inner p { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: rgba(255,255,255,0.7); line-height: 1.9; }
+    .welcome-inner .section-rule { margin: 1.2rem auto 2rem; }
+
+    /* STATS */
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-top: 3rem; }
+    .stat { background: var(--navy); padding: 2rem; text-align: center; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--gold); font-weight: 700; }
+    .stat-label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 0.3rem; }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: rgba(255,255,255,0.45); text-align: center; padding: 3rem 2rem; font-size: 0.82rem; letter-spacing: 0.05em; border-top: 1px solid var(--rule); }
+    footer strong { color: var(--gold); }
+
+    .fade { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 600px) {
+      .nav-logo { font-size: 0.85rem; } .nav-links a { padding: 0.85rem 0.7rem; font-size: 0.62rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">EC · MMC</a>
+  <button class="menu-toggle" id="mobile-menu-btn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="nav-links" id="nav-menu">
+    <a href="index.html" class="active">Home</a>
+    <a href="committee.html">Committee</a>
+    <a href="activities.html">Activities</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-badge">Government Michael Madhusudan College, Jashore</div>
+  <div class="hero-ornament">
+    <span></span>
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+      <circle cx="11" cy="11" r="4" fill="#C9A84C"/>
+      <circle cx="11" cy="11" r="9.5" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.4"/>
+    </svg>
+    <span></span>
+  </div>
+  <h1>English<em>Club</em></h1>
+  <p class="hero-sub">Department of English</p>
+  <div class="hero-est">
+    <span>Established</span>
+    <strong>2026</strong>
+  </div>
+  <div class="hero-btns">
+    <a href="committee.html" class="btn-primary">Meet the Team</a>
+    <a href="activities.html" class="btn-outline">Our Activities</a>
+  </div>
+</header>
+
+<!-- WELCOME -->
+<div class="welcome-band">
+  <div class="welcome-inner fade">
+    <p class="section-eyebrow">Welcome</p>
+    <h2 class="section-title">Where Language Meets Leadership</h2>
+    <div class="section-rule"></div>
+    <p>The English Club of Government Michael Madhusudan College is a student-led platform dedicated to nurturing language skills, literary appreciation, and confident communication. We bring together passionate students under the guidance of our distinguished faculty.</p>
+    <div class="stats">
+      <div class="stat"><div class="stat-num">2026</div><div class="stat-label">Established</div></div>
+      <div class="stat"><div class="stat-num">100+</div><div class="stat-label">Executive Members</div></div>
+      <div class="stat"><div class="stat-num">6+</div><div class="stat-label">Club Activities</div></div>
+      <div class="stat"><div class="stat-num">4</div><div class="stat-label">Faculty Coordinators</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- HIGHLIGHTS -->
+<div class="section">
+  <p class="section-eyebrow">Explore</p>
+  <h2 class="section-title">What We Offer</h2>
+  <div class="section-rule"></div>
+  <div class="highlights fade">
+    <div class="highlight-card">
+      <div class="highlight-icon">👥</div>
+      <h3>Our Committee</h3>
+      <p>Meet our Board of Advisors, Coordination Committee, and Students' Executive Committee.</p>
+      <a href="committee.html" class="highlight-link">View Committee →</a>
+    </div>
+    <div class="highlight-card">
+      <div class="highlight-icon">🏆</div>
+      <h3>Activities</h3>
+      <p>From debates and quizzes to book reviews, magazine publication, and career development sessions.</p>
+      <a href="activities.html" class="highlight-link">View Activities →</a>
+    </div>
+    <div class="highlight-card">
+      <div class="highlight-icon">🖼️</div>
+      <h3>Gallery</h3>
+      <p>Relive our moments — events, competitions, and club gatherings captured in photos.</p>
+      <a href="gallery.html" class="highlight-link">View Gallery →</a>
+    </div>
+    <div class="highlight-card">
+      <div class="highlight-icon">📞</div>
+      <h3>Contact Us</h3>
+      <p>Get in touch with us via email or find us on social media. We'd love to hear from you.</p>
+      <a href="contact.html" class="highlight-link">Contact →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p><strong>English Club</strong> &nbsp;·&nbsp; Est. 2026</p>
+  <p style="margin-top:0.5rem;">Government Michael Madhusudan College, Jashore, Bangladesh</p>
+  <p style="margin-top:0.5rem;">Department of English</p>
+</footer>
+
+<script>
+  // Mobile Menu Toggle
+  const toggleBtn = document.getElementById('mobile-menu-btn');
+  const navMenu = document.getElementById('nav-menu');
+  toggleBtn.addEventListener('click', () => {
+    toggleBtn.classList.toggle('active');
+    navMenu.classList.toggle('active');
+  });
+  document.addEventListener('click', (e) => {
+    if (!toggleBtn.contains(e.target) && !navMenu.contains(e.target)) {
+      toggleBtn.classList.remove('active');
+      navMenu.classList.remove('active');
+    }
+  });
+
+  const observer = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.12 });
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
